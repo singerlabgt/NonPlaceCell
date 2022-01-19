@@ -179,6 +179,19 @@ elseif PlotMode==6
         plot(x,y_mean,'color',barColor(i,:),'linewidth',1);
         plot(x,y_mean-y_errorbar,'color',sqrt(barColor(i,:)),'linewidth',0.5);
         plot(x,y_mean+y_errorbar,'color',sqrt(barColor(i,:)),'linewidth',0.5);
+elseif PlotMode==7
+        for i=1:length(x)
+% %         plot(x(i),y_mean(i),'color',barColor(i,:),'linestyle','none','marker','o','markersize',10);hold on
+% %         plot([x(i) x(i)],y_mean(i)+[-y_errorbar(i) y_errorbar(i)],'color',barColor(i,:));
+
+        plot(x(i),y_mean(i),'color',barColor(i,:),'linestyle','none','marker',Marker{i},'markersize',5,'markerfacecolor',barFaceColor(i,:));hold on
+        plot([x(i) x(i)],y_mean(i)+[-y_errorbar(i) y_errorbar(i)],'color',barColor(i,:),'linewidth',1);
+
+        
+        
+        end
+        plot(x,y_mean,'color',barColor(i,:),'linestyle','-');hold on
+
 
 else
 end
@@ -299,7 +312,7 @@ else
     GroupPair2=GroupPair;
     GroupPair2.Marker=Marker;
 
-    SubFunPlotErrorBar(x+deltaX/8,tempMean,tempStd,PlotColor,PlotMode,Datatype,[],GroupPair2);hold on;
+    SubFunPlotErrorBar(x+deltaX/8,tempMean,tempStd,PlotColor,PlotMode,Datatype,GroupPair2);hold on;
     if ~isfield(GroupPair,'SignY')
        GroupPair.SignY=max(tempMean)+max(tempStd)*1.5;
     end

@@ -16,7 +16,7 @@ Ystep=(max(Ytick)-min(Ytick))/20;
 hold on;
 
 
-if ~isfield(Param,'GroupPair')
+if ~isfield(Param,'PlotType')isempty(GroupPair)
    GroupPair.Pair=[];
    GroupPair.SignY=2;
    GroupPair.Plot=1;
@@ -25,8 +25,6 @@ if ~isfield(Param,'GroupPair')
    GroupPair.SamplePairedPlot=1; %%%%%%%%%Dash line for paired comparison sample
    GroupPair.LimY=[0 GroupPair.SignY*1.2];
    GroupPair.Marker={'o'};
-else
-   GroupPair=Param.GroupPair;
 end
 
 
@@ -37,20 +35,18 @@ for i=1:length(RateAll)
     plotX1(i)=(i-1)*dfX/2;
 end
 
-GroupPair1=GroupPair;
-
-
 for i=1:length(RateAll)
         plotX2=plotX1(i)+X;
-    if length(GroupPair.Marker)~=1
-       GroupPair1.Marker={GroupPair.Marker{i}};
-    end
 
     if size(RateAll{i},1)==length(X)
-    SubFunPlotErrorBar(X,nanmean(RateAll{i},2),ste(RateAll{i}'),Color(i,:),Param.PlotType,1,GroupPair1)
+%     a(i)=error_area(X,nanmean(RateAll{i},2),ste(RateAll{i}'),Color(i,:),0.4);
+%     ErrorBarPlotLU(X,nanmean(RateAll{i},2),ste(RateAll{i}'),Color(i,:),Param.PlotType,1);
+    SubFunPlotErrorBar(X,nanmean(RateAll{i},2),ste(RateAll{i}'),Color(i,:),Param.PlotType,1)
 
     else
-    SubFunPlotErrorBar(X,nanmean(RateAll{i}),ste(RateAll{i}),Color(i,:),Param.PlotType,1,GroupPair1);
+%     a(i)=error_area(X,nanmean(RateAll{i}),ste(RateAll{i}),Color(i,:),0.4);
+%     ErrorBarPlotLU(X,nanmean(RateAll{i}),ste(RateAll{i}),Color(i,:),Param.PlotType,1);
+    SubFunPlotErrorBar(X,nanmean(RateAll{i}),ste(RateAll{i}),Color(i,:),Param.PlotType,1);
     end
     hold on;
 
